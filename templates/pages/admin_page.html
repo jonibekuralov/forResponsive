@@ -1,0 +1,102 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %} Admin Sahifasi {% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'dist/admin_page.css' %}"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Adminlar</h2>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Rasm</th>
+                                <th>Username</th>
+                                <th>Familya</th>
+                                <th>Ism</th>
+                                <th>Telefon Raqami</th>
+                                <th>Email</th>
+                                <th>Qo'shimcha Ma'lumoti</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for admin in admin_users %}
+                            <tr>
+                                <td>
+                                    {% if admin.profile.photo %}
+                                    <img src="{{ admin.profile.photo.url }}" alt="Admin Rasmi">
+                                    {% else %}
+                                    <img src="{% static 'images/logo/user.jpg' %}" alt="Admin Rasmi">
+                                    {% endif %}
+                                </td>
+                                <td>{{ admin.username }}</td>
+                                <td>{{ admin.last_name|default:"None" }}</td>
+                                <td>{{ admin.first_name|default:"None" }}</td>
+                                <td>{{ admin.profile.phone|default:"None" }}</td>
+                                <td>{{ admin.email|default:"None" }}</td>
+                                <td>{{ admin.profile.about|default:"None" }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Userlar</h2>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Rasm</th>
+                                <th>Username</th>
+                                <th>Familya</th>
+                                <th>Ism</th>
+                                <th>Telefon Raqami</th>
+                                <th>Email</th>
+                                <th>Qo'shimcha Ma'lumoti</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>
+                                    {% if user.profile.photo %}
+                                    <img src="{{ user.profile.photo.url }}" alt="Foydalanuvchi Rasmi">
+                                    {% else %}
+                                    <img src="{% static 'images/logo/user.jpg' %}" alt="Foydalanuvchi Rasmi">
+                                    {% endif %}
+                                </td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.last_name }}</td>
+                                <td>{{ user.first_name }}</td>
+                                <td>{{ user.profile.phone|default:"None" }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.profile.about|default:"None" }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

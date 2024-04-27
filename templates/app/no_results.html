@@ -1,0 +1,16 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %} Natija Topilmadi {% endblock title %}
+
+{% block content %}
+
+<link href="{% static 'dist/no_results.css' %}" rel="stylesheet">
+<div class="container">
+    <h4>Bunaqa Xabar topilmadi!</h4>
+    <p>Kechirasiz,Bunday:<span class="query">{{ query }}</span> so'rov uchun hech qanday natija topilmadi:</p>
+    <a href="{% url 'home_list' %}" class="btn">Bosh Sahifaga Qaytish</a>
+</div>
+
+
+{% endblock content %}

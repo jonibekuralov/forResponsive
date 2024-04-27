@@ -1,0 +1,33 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %} Aloqa {% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'dist/complaint.css' %}">
+<div class="container">
+    <h2>Biz bilan aloqa</h2>
+    <br>
+    <br>
+    <br>
+    <form action="#" method="post">{% csrf_token %}
+
+        <input type="text" id="name" name="name" placeholder="Ism Familiya " required>
+        <br>
+        <select class="custom-select" id="inputGroupSelect01" name="subject">
+            <option selected>Kursingiz tanlang...</option>
+            <option value="1-kurs">1-kurs</option>
+            <option value="2-kurs">2-kurs</option>
+            <option value="3-kurs">3-kurs</option>
+            <option value="4-kurs">4-kurs</option>
+        </select>
+        <br>
+        <input type="email" id="email" name="email" placeholder="email@gmail.com" required>
+        <br>
+        <textarea id="message" name="message" rows="10" placeholder="Murojaatingizni qoldiring..." required></textarea>
+        <br>
+        <button type="submit">Yuborish</button>
+    </form>
+</div>
+
+{% endblock content %}

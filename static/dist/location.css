@@ -1,0 +1,22 @@
+/* Стилизация обертки карты */
+.map-container {
+    width: 600px;
+    height: 450px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/* Стилизация iframe */
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Опциональные стили для заголовка */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}

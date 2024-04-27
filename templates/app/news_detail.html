@@ -1,0 +1,51 @@
+{% extends 'app/base.html' %}
+{% load embed_video_tags %}
+{% load static %}
+
+{% block title %} Bosh sahifa {% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'dist/news_detail.css' %}">
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h1>{{ news.title }}</h1>
+            <br>
+            <p>O'qituvchi: {{ news.author }}</p>
+        </div>
+    </div>
+</div>
+<h3>Video fayl</h3>
+{% video news.YoutubeLink  '1100x700' %}
+<br>
+<br>
+{% if news.DocumentFile %}
+<div class="vn-blue" style="text-align: left;">
+    <a href="{{ news.DocumentFile.url }}" download class="btn-wrap">FAYLNI YUKLASH</a>
+</div>
+{% endif %}
+<br>
+<h3>Krassword</h3>
+<iframe src="{{ news.TestLink }}" width="1100" height="700" frameborder="0" allowfullscreen></iframe>
+<br>
+<h3>Test</h3>
+<iframe src="{{ news.CrosswordLink }}" width="1100" height="700" frameborder="0" allowfullscreen></iframe>
+<br>
+
+
+<h5>Mavzu materiallari joylashtirilgan sana: {{ news.publish_time }}</h5>
+
+{% if request.user.is_authenticated and request.user.is_superuser %}
+<div class="container">
+   <button class="btn btn-info" style="text-decoration: none;">
+    <a href="{% url 'news_create' %}" style="color: #fff; text-decoration: none;">Yangilik qo'shish</a>
+</button>
+<button class="btn btn-success" style="text-decoration: none;">
+    <a href="{% url 'news_update' news.slug %}" style="color: #fff; text-decoration: none;">Tahrirlash</a>
+</button>
+<button class="btn btn-danger" style="text-decoration: none;">
+    <a href="{% url 'news_delete' news.slug %}" style="color: #fff; text-decoration: none;">O'chirish</a>
+</button>
+</div>
+{% endif %}
+{% endblock content %}

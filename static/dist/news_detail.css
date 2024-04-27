@@ -1,0 +1,46 @@
+.vn-blue a{
+background-color:#2980b9;
+  display:inline-block;
+  position:relative;
+  margin:30px 5px;
+  weight: 130px;
+  padding:20px 20px 20px 80px;
+  color: #fff;
+  transition:all 0.4s
+}
+
+.vn-blue a:before{
+  content:"\f019";
+  font-family:fontAwesome;
+  position:absolute;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  font-size:28px;
+  border-radius:0 20px 0 0;
+  color:#000;
+  background-color:#fff;
+  opacity:0.3;
+  padding:20px;
+  top:0;
+  left:0
+}
+
+.vn-blue a:hover{
+  background:#2c3e50
+}
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    background-color: #17a2b8;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #138496;
+}

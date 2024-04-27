@@ -1,0 +1,109 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %} Profilni tahrirlash {% endblock title %}
+
+{% block content %}
+
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(
+              #005AA7, #FFFDE4
+      );
+      margin: 0;
+      padding: 0;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 560px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="date"],
+    .form-group input[type="image"],
+    .form-group input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .form-group input[type="file"] {
+      margin-top: 5px;
+    }
+
+    .form-group input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .form-group input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+</style>
+<body>
+
+<div class="container">
+    <h3>Malumotlarni o'zgartirish</h3>
+    <br>
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        <div class="form-group">
+            <label for="username">Foydalanuvchi Nomingiz: </label>
+            <input type="text" id="username" name="username">
+        </div>
+        <div class="form-group">
+            <label for="first_name">Ism: </label>
+            <input type="text" id="first_name" name="first_name">
+        </div>
+        <div class="form-group">
+            <label for="last_name">Familya: </label>
+            <input type="text" id="last_name" name="last_name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email: </label>
+            <input type="email" id="email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="photo">Photo: </label>
+            <input type="file" id="photo" name="photo">
+        </div>
+        <div class="form-group">
+            <label for="phone">Telefon Raqam: </label>
+            <input type="number" id="phone" name="phone">
+        </div>
+        <div class="form-group">
+            <label for="phone">Qo'shimcha Ma'lumot: </label>
+            <input placeholder="(Shart Emas)" type="text" id="about" name="about">
+        </div>
+        <div class="form-group">
+            <input type="submit" value="O'zgartirish">
+        </div>
+    </form>
+</div>
+
+</body>
+
+{% endblock content %}

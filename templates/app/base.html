@@ -1,0 +1,224 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    {% block title %} {% endblock title %}
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- site icon -->
+    <link rel="icon" href="{% static 'images/fevicon.png' %}" type="image/png"/>
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+    <!-- site css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <!-- responsive css -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}"/>
+    <!-- color css -->
+    <link rel="stylesheet" href="{% static 'css/colors.css' %}"/>
+    <!-- select bootstrap -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap-select.css' %}"/>
+    <!-- scrollbar css -->
+    <link rel="stylesheet" href="{% static 'css/perfect-scrollbar.css' %}"/>
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}"/>
+    <!--[if lt IE 9]>
+    <![endif]-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="dashboard dashboard_1">
+<div class="full_container">
+    <div class="inner_container">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar_blog_1">
+                <div class="sidebar-header">
+                    <div class="logo_section">
+                        {% if request.user.profile.photo %}
+                        <a><img class="logo_icon img-responsive"
+                                src="{{ request.user.profile.photo.url }}" alt="logo"/></a>
+                        {% else %}
+                        <a><img
+                                class="logo_icon img-responsive"
+                                src="{% static 'images/logo/user.jpg' %}" alt="logo"/></a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="sidebar_user_info">
+                    <div class="icon_setting"></div>
+                    <div class="user_profle_side">
+                        {% if request.user.profile.photo %}
+                        <div class="user_img"><img class="img-responsive" src="{{ request.user.profile.photo.url }}"
+                                                   alt="#"/></div>
+                        <div class="user_info">
+                            <h6>{{ request.user.username }}</h6>
+                            <p><span class="online_animation"></span> Online</p>
+                        </div>
+                        {% else %}
+                        <div class="user_img"><img class="img-responsive" src="{% static 'images/logo/img.png' %}"
+                                                   alt="#"/></div>
+
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar_blog_2">
+                <h4>Web dasturlashga kirish</h4>
+                <ul class="list-unstyled components">
+                    <li><a href="{% url 'home_list' %}"><i class="fa fa-home white_color2"></i> <span>Bosh sahifa</span></a>
+                    </li>
+                    <li>
+                        <a href="#apps" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-list" aria-hidden="true"></i> <span>Mavzular</span></a>
+                        <ul class="collapse list-unstyled" id="apps">
+                            {% for news in latest_resource reversed %}
+                            <li><a href="{{ news.get_absolute_url }}"><i class="fa fa-book" aria-hidden="true"></i>
+                                <span>{{ news.title }}</span></a></li>
+                            {% endfor %}
+                        </ul>
+                        {% for news in libary reversed %}
+                    <li><a href="{{ news.url }}"><i class="fa fa-book" aria-hidden="true"></i>
+                        <span>{{ news.title }}</span></a>
+                    </li>
+                    {% endfor %}
+                    <li><a href="{% url 'location' %}"><i class="fa fa-map-marker" aria-hidden="true"></i> <span>Joylashuv</span></a>
+                    </li>
+                    <li><a href="{% url 'contact_page' %}"><i class="fa fa-phone" aria-hidden="true"></i> <span>Biz bilan aloqa</span></a>
+                    </li>
+                    <li><a href="{% url 'calendar' %}"><i class="fa fa-calendar" aria-hidden="true"></i>
+                        <span>Kalendar</span></a>
+                    </li>
+                    <li><a href="{% url 'user_profile' %}"><i class="fa fa-user" aria-hidden="true"></i> <span>Profil Sozlamalari</span></a>
+                    </li>
+                    {% if request.user.is_authenticated and request.user.is_superuser %}
+                    <li><a href="{% url 'admin_page' %}"><i class='fa fa-user-secret'></i>
+                        <span>Admin Sahifasi</span></a>
+                    </li>
+                    {% endif %}
+                    <li style="padding-top:100px"><a>{% now "j F Y H:i" %}</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div id="content">
+            <!-- topbar -->
+            <div class="topbar">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="full">
+                        <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i>
+                        </button>
+                        <div class="logo_section">
+                            <a href="{% url 'home_list' %}"><img class="img-responsive"
+                                                                 src="{% static 'images/logo/logo_icon.png' %}"
+                                                                 alt="e-universitet"/></a>
+                        </div>
+                        <div class="logo_section">
+                            <form action="{% url 'search_results' %}"> {% csrf_token %}
+                                <div class="input-group mb-3">
+                                    <input type="text" name="q" pattern=".*\S.*" required
+                                           style="margin-left:500px; margin-top:15px;" class="form-control"
+                                           placeholder="Qidiring..." aria-label="Recipient's username"
+                                           aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-danger" style="margin-top:15px" type="submit">
+                                            Qidirish
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="right_topbar">
+                            <div class="icon_info">
+                                <ul class="user_profile_dd">
+                                    <li>
+                                        {% if request.user.profile.photo %}
+                                        <a class="dropdown-toggle" data-toggle="dropdown"><img
+                                                class="img-responsive rounded-circle"
+                                                src="{{ request.user.profile.photo.url }}" alt="#"/><span
+                                                class="name_user">{{ request.user.username }}</span></a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{% url 'login' %}">Kirish</a>
+                                            <a class="dropdown-item" href="{% url 'user_profile' %}">Profil</a>
+                                            <a class="dropdown-item" href="{% url 'logout' %}"><span>Chiqish</span> <i
+                                                    class="fa fa-sign-out"></i></a>
+                                        </div>
+                                        {% else %}
+                                        <a class="dropdown-toggle" data-toggle="dropdown"><img
+                                                class="img-responsive rounded-circle"
+                                                src="{% static 'images/logo/img.png' %}" alt="#"/><span
+                                                class="name_user">{{ request.user.username }}</span></a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{% url 'login' %}"><i
+                                                    class="fa fa-sign-in-alt"></i> Kirish</a>
+                                            <a class="dropdown-item" href="{% url 'user_profile' %}"><i
+                                                    class='fa fa-user-circle'></i> Profil</a>
+                                            {% if user.is_authenticated %}
+                                            <a class="dropdown-item" href="{% url 'logout' %}"><span>Chiqish</span> <i
+                                                    class="fa fa-sign-out"></i></a>
+                                            {% endif %}
+                                        </div>
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <!-- end topbar -->
+
+            {% block content %}
+
+            {% endblock content %}
+
+            <!-- footer -->
+            <div class="container-fluid">
+                <div class="footer text-center">
+                    {% for foot in footer %}
+                    <h6>{{foot.copyright}}</h6>
+                    <a href="tel:{foot.phone}}"><h6>{{foot.phone}}</h6></a>
+                    <a href="https://{{foot.email}}"><h6>{{foot.email}}</h6></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- end dashboard inner -->
+    </div>
+</div>
+
+{% block javascript %}
+<!-- jQuery -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/animate.js' %}"></script>
+<!-- select country -->
+<script src="{% static 'js/bootstrap-select.js' %}"></script>
+<!-- owl carousel -->
+<script src="{%  static 'js/owl.carousel.js'%}"></script>
+<!-- chart js -->
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script src="{% static 'js/Chart.bundle.min.js' %}"></script>
+<script src="{% static 'js/utils.js' %}"></script>
+<script src="{% static 'js/analyser.js' %}"></script>
+<!-- nice scrollbar -->
+<script src="{% static 'js/perfect-scrollbar.min.js' %}?"></script>
+<script>
+    var ps = new PerfectScrollbar('#sidebar');
+</script>
+<!-- custom js -->
+<script src="{%  static 'js/custom.js' %}"></script>
+<script src="{% static 'js/chart_custom_style1.js' %}"></script>
+
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+{% endblock javascript %}
+</body>
+</html>

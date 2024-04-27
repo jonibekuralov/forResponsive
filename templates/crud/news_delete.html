@@ -1,0 +1,15 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}{{ resource.slug }} {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Joriy yangilikni o'chirish</h2>
+    <form method="post" class="delete-form">
+        {% csrf_token %}
+        <p>{{ resource.title }} <br><b>Ushbu xabarni o'chirmoqchimsiz?</b></p>
+        <button type="submit" class="btn btn-danger">O'chirish</button>
+    </form>
+</div>
+{% endblock content %}

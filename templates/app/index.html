@@ -1,0 +1,72 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %} Главная страница {% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'dist/index.css' %}"/>
+<div class="container">
+    <h1 class="title">Fan va Resurslar</h1>
+    <div class="section">
+        <div class="card-container">
+            {% for news in latest_resource %}
+            <a href="{{ news.get_absolute_url }}" class="card">
+                <div class="card-content">
+                    <h2 class="card-title">{{ news.title }}</h2>
+                    <img src="{% static 'images/index_icons/theme_pk.png' %}" alt="user" class="icon">
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <h1 class="title">Qo'shimcha O'rganish Uchun</h1>
+    <div class="section">
+        <div class="card-container">
+            {% for news in libary %}
+            <a href="{{ news.url|default:'https://unilibrary.uz/' }}" class="card">
+                <div class="card-content library-content">
+                    <img src="{% static 'images/index_icons/libary.png' %}" alt="library">
+                    <h2 class="card-title">{{ news.title }}</h2>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <h1 class="title">Profile Sozlamar</h1>
+    <div class="section">
+        <div class="card-container">
+            <a href="{% url 'user_profile' %}" class="card">
+                <div class="card-content profile-content">
+                    <img src="{% static 'images/index_icons/user.png' %}" alt="user" class="icon">
+                    <h2 class="card-title">Profil</h2>
+                </div>
+            </a>
+            {% if request.user.is_authenticated and request.user.is_superuser %}
+            <a href="{% url 'admin_page' %}" class="card">
+                <div class="card-content admin-content">
+                    <img src="{% static 'images/index_icons/admin.png' %}" alt="admin" class="icon">
+                    <h2 class="card-title">Admin Panel</h2>
+                </div>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    <h1 class="title">Bog'lanish</h1>
+    <div class="section">
+        <div class="card-container">
+            <a href="{% url 'location' %}" class="card">
+                <div class="card-content profile-content">
+                    <img src="{% static 'images/index_icons/map.png' %}" alt="map" class="icon">
+                    <h2 class="card-title">Joylashuvimiz</h2>
+                </div>
+            </a>
+            <a href="{% url 'contact_page' %}" class="card">
+                <div class="card-content admin-content">
+                    <img src="{% static 'images/index_icons/phone.png' %}" alt="contact" class="icon">
+                    <h2 class="card-title">Biz Bilan Bog'lanish</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

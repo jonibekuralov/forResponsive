@@ -1,0 +1,32 @@
+{% extends 'app/base.html' %}
+{% load embed_video_tags %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'dist/search_results.css' %}">
+<div class="search-results">
+    {% for theme in all_theme %}
+    <h2>{{ theme.title }}</h2>
+    <br>
+    <i>O'qituvchi: {{ theme.author }}</i>
+    <ul class="results-list">
+        <li class="result-item">
+            <div class="result-details">
+                <a href="{{ theme.get_absolute_url }}" class="result-title">{{ theme.name }}</a>
+                {% if request.user.is_authenticated %}
+                <h4 class="result-description">{{ theme.body }}</h4>
+                {% endif %}
+                <div class="result-links">
+                    <a href="{{ theme.get_absolute_url }}"><h1 class="document-link">Batafsil</h1></a>
+                    <hr>
+                    <p>{{ theme.publish_time }}</p>
+                </div>
+            </div>
+        </li>
+    </ul>
+    {% endfor %}
+</div>
+
+{% endblock content %}

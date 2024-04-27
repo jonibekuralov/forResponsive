@@ -1,0 +1,49 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}Post yaratish{% endblock title %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'dist/crud_news_create.css' %}">
+<div class="container">
+    <h3 class="text-center">Yangilik qo'shish</h3>
+    <form method="post" enctype="multipart/form-data" class="create-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_title">Title:</label>
+            <input type="text" id="id_title" name="title" class="form-control" placeholder="Sarlavhani kiriting">
+        </div>
+        <div class="form-group">
+            <label for="id_body">Body:</label>
+            <textarea id="id_body" name="body" class="form-control" placeholder="Matnni kiriting"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="id_DocumentFile">Hujjat fayli:</label>
+            <input type="file" id="id_DocumentFile" name="DocumentFile" class="form-control-file">
+        </div>
+        <div class="form-group">
+            <label for="id_TestLink">Test Link:</label>
+            <input type="text" id="id_TestLink" name="TestLink" class="form-control"
+                   placeholder="Test havolasini kiriting">
+        </div>
+        <div class="form-group">
+            <label for="id_CrosswordLink">Krossvord link:</label>
+            <input type="text" id="id_CrosswordLink" name="CrosswordLink" class="form-control"
+                   placeholder="Krossvord havolasini kiriting">
+        </div>
+        <div class="form-group">
+            <label for="id_YoutubeLink">YouTube Link:</label>
+            <input type="text" id="id_YoutubeLink" name="YoutubeLink" class="form-control"
+                   placeholder="YouTube havolasini kiriting">
+        </div>
+        <div class="form-group">
+            <label for="id_status">Status:</label>
+            <select id="id_status" name="status" class="form-control">
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-info">Yangilik qo'shish</button>
+    </form>
+</div>
+{% endblock content %}

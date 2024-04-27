@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ro'yxatdan Muafaqqiyatli o'tdingiz</title>
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f4;
+        }
+
+        .container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+
+        .success-box {
+          text-align: center;
+          width: 50%;
+          height: 200px;
+          background-color: #fff;
+          padding: 50px;
+          border-radius: 30px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .success-box h1 {
+          color: #4CAF50;
+        }
+
+        .success-box p {
+          margin-top: 10px;
+          color: #333;
+        }
+
+        .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+}
+
+        .btn:hover {
+         background-color: #45a049;
+}
+
+
+        .success-box button {
+          padding: 10px 20px;
+          background-color: #4CAF50;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        .success-box button:hover {
+          background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="success-box">
+        <h1>Muvaffaqiyatli!</h1>
+        <p>{{ new_user.first_name }} {{ new_user.last_name }} Siz muvaffaqiyatli ro'yxatdan o'tdingiz</p>
+        <a href="{% url 'login' %}" class="btn">Kirish</a>
+    </div>
+</div>
+</body>
+</html>
